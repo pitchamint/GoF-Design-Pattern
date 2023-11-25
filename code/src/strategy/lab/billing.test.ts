@@ -28,12 +28,19 @@ describe('[Strategy - begin] Generate monthly billing based-on total hours and p
   it('should always return 0 for unknown package', () => {
     // given
     const totalHours = 10;
-    const packageType = 'UNKNOWN';
 
     // when
-    const billing = new Billing(totalHours, packageType);
+    const billing = new Billing(totalHours, PackageType.UNKNOWN);
 
     // then
     expect(billing.monthlyBill()).toBe(0);
+  });
+
+  it('should return 50 when total hours less than or equal to 50', () => {
+    //given
+    const totalHours = 50;
+    const billing = new Billing(totalHours, PackageType.STEPPING);
+
+    expect(billing.monthlyBill()).toBe(53.5);
   });
 });
